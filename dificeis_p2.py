@@ -97,132 +97,16 @@ while(True):
                         I -= 1    
                         J -= 1
             elif(tabuleiro[i][j] == 'N'): #Movimentos Cavalo
-                if(i == 0):
-                    if(j == 0):
-                        tabuleiro[i+2][j+1] = switch(tabuleiro[i+2][j+1])
-                        tabuleiro[i+1][j+2] = switch(tabuleiro[i+1][j+2])
-                    elif(j == 1):
-                        tabuleiro[i+2][j-1] = switch(tabuleiro[i+2][j+2])
-                        tabuleiro[i+2][j+1] = switch(tabuleiro[i+2][j+1])
-                        tabuleiro[i+1][j+2] = switch(tabuleiro[i+1][j-1])
-                    elif(j == 6):
-                        tabuleiro[i+2][j-1] = switch(tabuleiro[i+2][j-1])
-                        tabuleiro[i+2][j+1] = switch(tabuleiro[i+2][j-1])
-                        tabuleiro[i+1][j-2] = switch(tabuleiro[i+1][j-2])
-                    elif(j == 7):
-                        tabuleiro[i+2][j-1] = switch(tabuleiro[i+2][j-1])
-                        tabuleiro[i+1][j-2] = switch(tabuleiro[i+1][j-2])
-                    else:
-                        tabuleiro[i+2][j-1] = switch(tabuleiro[i+2][j-1])
-                        tabuleiro[i+2][j+1] = switch(tabuleiro[i+2][j-1])
-                        tabuleiro[i+1][j-2] = switch(tabuleiro[i+1][j-2])   
-                        tabuleiro[i+1][j+2] = switch(tabuleiro[i+1][j+2])                  
-                elif(i == 1):
-                    if(j == 0):
-                        tabuleiro[i+2][j+1] = switch(tabuleiro[i+2][j+1])
-                        tabuleiro[i+1][j+2] = switch(tabuleiro[i+1][j+2])
-                        tabuleiro[i-1][j+2] = switch(tabuleiro[i-1][j+2])
-                    elif(j == 1):
-                        tabuleiro[i+2][j-1] = switch(tabuleiro[i+2][j+2])
-                        tabuleiro[i+2][j+1] = switch(tabuleiro[i+2][j+1])
-                        tabuleiro[i+1][j+2] = switch(tabuleiro[i+1][j-1])
-                        tabuleiro[i-1][j+2] = switch(tabuleiro[i-1][j+2])
-                    elif(j == 6):
-                        tabuleiro[i+2][j-1] = switch(tabuleiro[i+2][j-1])
-                        tabuleiro[i+2][j+1] = switch(tabuleiro[i+2][j-1])
-                        tabuleiro[i+1][j-2] = switch(tabuleiro[i+1][j-2])
-                        tabuleiro[i-1][j-2] = switch(tabuleiro[i-1][j-2])
-                    elif(j == 7):
-                        tabuleiro[i+2][j-1] = switch(tabuleiro[i+2][j-1])
-                        tabuleiro[i+1][j-2] = switch(tabuleiro[i+1][j-2])
-                        tabuleiro[i-1][j-2] = switch(tabuleiro[i-1][j-2])
-                    else:
-                        tabuleiro[i-1][j-2] = switch(tabuleiro[i-1][j-2])   
-                        tabuleiro[i-1][j+2] = switch(tabuleiro[i-1][j+2])  
-                        tabuleiro[i+2][j-1] = switch(tabuleiro[i+2][j-1])
-                        tabuleiro[i+2][j+1] = switch(tabuleiro[i+2][j-1])
-                        tabuleiro[i+1][j-2] = switch(tabuleiro[i+1][j-2])   
-                        tabuleiro[i+1][j+2] = switch(tabuleiro[i+1][j+2])  
-                elif(i == 6):
-                    if(j == 0):
-                        tabuleiro[i+1][j+2] = switch(tabuleiro[i+1][j+2])
-                        tabuleiro[i-1][j+2] = switch(tabuleiro[i-1][j+2])
-                        tabuleiro[i-2][j+1] = switch(tabuleiro[i-2][j+1])
-                    elif(j == 1):
-                        tabuleiro[i+1][j+2] = switch(tabuleiro[i+1][j-1])
-                        tabuleiro[i-1][j+2] = switch(tabuleiro[i-1][j+2])
-                        tabuleiro[i-2][j+1] = switch(tabuleiro[i-2][j+1])
-                        tabuleiro[i-2][j-1] = switch(tabuleiro[i-2][j-1])
-                    elif(j == 6):
-                        tabuleiro[i+1][j-2] = switch(tabuleiro[i+1][j-2])
-                        tabuleiro[i-1][j-2] = switch(tabuleiro[i-1][j-2])
-                        tabuleiro[i-2][j+1] = switch(tabuleiro[i-2][j+1])
-                        tabuleiro[i-2][j-1] = switch(tabuleiro[i-2][j-1])
-                    elif(j == 7):
-                        tabuleiro[i+1][j-2] = switch(tabuleiro[i+1][j-2])
-                        tabuleiro[i-1][j-2] = switch(tabuleiro[i-1][j-2])
-                        tabuleiro[i-2][j-1] = switch(tabuleiro[i-2][j-1])
-                    else:
-                        tabuleiro[i-2][j-1] = switch(tabuleiro[i-2][j-1])   
-                        tabuleiro[i-2][j+1] = switch(tabuleiro[i-2][j+1])
-                        tabuleiro[i-1][j-2] = switch(tabuleiro[i-1][j-2])   
-                        tabuleiro[i-1][j+2] = switch(tabuleiro[i-1][j+2])  
-                        tabuleiro[i+1][j-2] = switch(tabuleiro[i+1][j-2])   
-                        tabuleiro[i+1][j+2] = switch(tabuleiro[i+1][j+2]) 
-                elif(i == 7):
-                    if(j == 0):
-                        tabuleiro[i-1][j+2] = switch(tabuleiro[i-1][j+2])
-                        tabuleiro[i-2][j+1] = switch(tabuleiro[i-2][j+1])
-                    elif(j == 1):
-                        tabuleiro[i-1][j+2] = switch(tabuleiro[i-1][j+2])
-                        tabuleiro[i-2][j+1] = switch(tabuleiro[i-2][j+1])
-                        tabuleiro[i-2][j-1] = switch(tabuleiro[i-2][j-1])
-                    elif(j == 6):
-                        tabuleiro[i-1][j-2] = switch(tabuleiro[i-1][j-2])
-                        tabuleiro[i-2][j+1] = switch(tabuleiro[i-2][j+1])
-                        tabuleiro[i-2][j-1] = switch(tabuleiro[i-2][j-1])
-                    elif(j == 7):
-                        tabuleiro[i-1][j-2] = switch(tabuleiro[i-1][j-2])
-                        tabuleiro[i-2][j-1] = switch(tabuleiro[i-2][j-1])
-                    else:
-                        tabuleiro[i-2][j-1] = switch(tabuleiro[i-2][j-1])   
-                        tabuleiro[i-2][j+1] = switch(tabuleiro[i-2][j+1])
-                        tabuleiro[i-1][j-2] = switch(tabuleiro[i-1][j-2])   
-                        tabuleiro[i-1][j+2] = switch(tabuleiro[i-1][j+2])                
-                else:
-                    if(j == 0):
-                        tabuleiro[i+2][j+1] = switch(tabuleiro[i+2][j+1])
-                        tabuleiro[i+1][j+2] = switch(tabuleiro[i+1][j+2])
-                        tabuleiro[i-1][j+2] = switch(tabuleiro[i-1][j+2])
-                        tabuleiro[i-2][j+1] = switch(tabuleiro[i-2][j+1])
-                    elif(j == 1):
-                        tabuleiro[i+2][j+1] = switch(tabuleiro[i+2][j+1])
-                        tabuleiro[i+2][j-1] = switch(tabuleiro[i+2][j-1])
-                        tabuleiro[i+1][j+2] = switch(tabuleiro[i+1][j-1])
-                        tabuleiro[i-1][j+2] = switch(tabuleiro[i-1][j+2])
-                        tabuleiro[i-2][j+1] = switch(tabuleiro[i-2][j+1])
-                        tabuleiro[i-2][j-1] = switch(tabuleiro[i-2][j-1])
-                    elif(j == 6):
-                        tabuleiro[i+2][j+1] = switch(tabuleiro[i+2][j+1])
-                        tabuleiro[i+2][j-1] = switch(tabuleiro[i+2][j-1])                    
-                        tabuleiro[i+1][j-2] = switch(tabuleiro[i+1][j-2])
-                        tabuleiro[i-1][j-2] = switch(tabuleiro[i-1][j-2])
-                        tabuleiro[i-2][j+1] = switch(tabuleiro[i-2][j+1])
-                        tabuleiro[i-2][j-1] = switch(tabuleiro[i-2][j-1])
-                    elif(j == 7):
-                        tabuleiro[i+2][j-1] = switch(tabuleiro[i+2][j-1])                    
-                        tabuleiro[i+1][j-2] = switch(tabuleiro[i+1][j-2])
-                        tabuleiro[i-1][j-2] = switch(tabuleiro[i-1][j-2])
-                        tabuleiro[i-2][j-1] = switch(tabuleiro[i-2][j-1])
-                    else:
-                        tabuleiro[i-2][j-1] = switch(tabuleiro[i-2][j-1])   
-                        tabuleiro[i-2][j+1] = switch(tabuleiro[i-2][j+1])
-                        tabuleiro[i-1][j-2] = switch(tabuleiro[i-1][j-2])   
-                        tabuleiro[i-1][j+2] = switch(tabuleiro[i-1][j+2])  
-                        tabuleiro[i+1][j-2] = switch(tabuleiro[i+1][j-2])   
-                        tabuleiro[i+1][j+2] = switch(tabuleiro[i+1][j+2])
-                        tabuleiro[i+2][j-1] = switch(tabuleiro[i+2][j-1])
-                        tabuleiro[i+2][j+1] = switch(tabuleiro[i+2][j-1])                
+                vet_I = [-2,-2,-1,-1,1,1,2,2]
+                vet_J = [1,-1,2,-2,2,-2,1,-1]
+                for k in range(len(vet_I)):
+                    I = i + vet_I[k]
+                    J = j + vet_J[k]
+                    if(I >= 0 and J >= 0):
+                        try:
+                            tabuleiro[I][J] = switch(tabuleiro[I][J])
+                        except IndexError:
+                            continue                                   
             elif(tabuleiro[i][j] == 'R'): #Movimentos Torre
                     I = i+1
                     J = j
@@ -365,132 +249,16 @@ while(True):
                         I -= 1    
                         J -= 1
             elif(tabuleiro2[i][j] == 'n'): #Movimentos Cavalo
-                if(i == 0):
-                    if(j == 0):
-                        tabuleiro2[i+2][j+1] = switch2(tabuleiro2[i+2][j+1])
-                        tabuleiro2[i+1][j+2] = switch2(tabuleiro2[i+1][j+2])
-                    elif(j == 1):
-                        tabuleiro2[i+2][j-1] = switch2(tabuleiro2[i+2][j+2])
-                        tabuleiro2[i+2][j+1] = switch2(tabuleiro2[i+2][j+1])
-                        tabuleiro2[i+1][j+2] = switch2(tabuleiro2[i+1][j-1])
-                    elif(j == 6):
-                        tabuleiro2[i+2][j-1] = switch2(tabuleiro2[i+2][j-1])
-                        tabuleiro2[i+2][j+1] = switch2(tabuleiro2[i+2][j-1])
-                        tabuleiro2[i+1][j-2] = switch2(tabuleiro2[i+1][j-2])
-                    elif(j == 7):
-                        tabuleiro2[i+2][j-1] = switch2(tabuleiro2[i+2][j-1])
-                        tabuleiro2[i+1][j-2] = switch2(tabuleiro2[i+1][j-2])
-                    else:
-                        tabuleiro2[i+2][j-1] = switch2(tabuleiro2[i+2][j-1])
-                        tabuleiro2[i+2][j+1] = switch2(tabuleiro2[i+2][j-1])
-                        tabuleiro2[i+1][j-2] = switch2(tabuleiro2[i+1][j-2])   
-                        tabuleiro2[i+1][j+2] = switch2(tabuleiro2[i+1][j+2])                  
-                elif(i == 1):
-                    if(j == 0):
-                        tabuleiro2[i+2][j+1] = switch2(tabuleiro2[i+2][j+1])
-                        tabuleiro2[i+1][j+2] = switch2(tabuleiro2[i+1][j+2])
-                        tabuleiro2[i-1][j+2] = switch2(tabuleiro2[i-1][j+2])
-                    elif(j == 1):
-                        tabuleiro2[i+2][j-1] = switch2(tabuleiro2[i+2][j+2])
-                        tabuleiro2[i+2][j+1] = switch2(tabuleiro2[i+2][j+1])
-                        tabuleiro2[i+1][j+2] = switch2(tabuleiro2[i+1][j-1])
-                        tabuleiro2[i-1][j+2] = switch2(tabuleiro2[i-1][j+2])
-                    elif(j == 6):
-                        tabuleiro2[i+2][j-1] = switch2(tabuleiro2[i+2][j-1])
-                        tabuleiro2[i+2][j+1] = switch2(tabuleiro2[i+2][j-1])
-                        tabuleiro2[i+1][j-2] = switch2(tabuleiro2[i+1][j-2])
-                        tabuleiro2[i-1][j-2] = switch2(tabuleiro2[i-1][j-2])
-                    elif(j == 7):
-                        tabuleiro2[i+2][j-1] = switch2(tabuleiro2[i+2][j-1])
-                        tabuleiro2[i+1][j-2] = switch2(tabuleiro2[i+1][j-2])
-                        tabuleiro2[i-1][j-2] = switch2(tabuleiro2[i-1][j-2])
-                    else:
-                        tabuleiro2[i-1][j-2] = switch2(tabuleiro2[i-1][j-2])   
-                        tabuleiro2[i-1][j+2] = switch2(tabuleiro2[i-1][j+2])  
-                        tabuleiro2[i+2][j-1] = switch2(tabuleiro2[i+2][j-1])
-                        tabuleiro2[i+2][j+1] = switch2(tabuleiro2[i+2][j-1])
-                        tabuleiro2[i+1][j-2] = switch2(tabuleiro2[i+1][j-2])   
-                        tabuleiro2[i+1][j+2] = switch2(tabuleiro2[i+1][j+2])  
-                elif(i == 6):
-                    if(j == 0):
-                        tabuleiro2[i+1][j+2] = switch2(tabuleiro2[i+1][j+2])
-                        tabuleiro2[i-1][j+2] = switch2(tabuleiro2[i-1][j+2])
-                        tabuleiro2[i-2][j+1] = switch2(tabuleiro2[i-2][j+1])
-                    elif(j == 1):
-                        tabuleiro2[i+1][j+2] = switch2(tabuleiro2[i+1][j-1])
-                        tabuleiro2[i-1][j+2] = switch2(tabuleiro2[i-1][j+2])
-                        tabuleiro2[i-2][j+1] = switch2(tabuleiro2[i-2][j+1])
-                        tabuleiro2[i-2][j-1] = switch2(tabuleiro2[i-2][j-1])
-                    elif(j == 6):
-                        tabuleiro2[i+1][j-2] = switch2(tabuleiro2[i+1][j-2])
-                        tabuleiro2[i-1][j-2] = switch2(tabuleiro2[i-1][j-2])
-                        tabuleiro2[i-2][j+1] = switch2(tabuleiro2[i-2][j+1])
-                        tabuleiro2[i-2][j-1] = switch2(tabuleiro2[i-2][j-1])
-                    elif(j == 7):
-                        tabuleiro2[i+1][j-2] = switch2(tabuleiro2[i+1][j-2])
-                        tabuleiro2[i-1][j-2] = switch2(tabuleiro2[i-1][j-2])
-                        tabuleiro2[i-2][j-1] = switch2(tabuleiro2[i-2][j-1])
-                    else:
-                        tabuleiro2[i-2][j-1] = switch2(tabuleiro2[i-2][j-1])   
-                        tabuleiro2[i-2][j+1] = switch2(tabuleiro2[i-2][j+1])
-                        tabuleiro2[i-1][j-2] = switch2(tabuleiro2[i-1][j-2])   
-                        tabuleiro2[i-1][j+2] = switch2(tabuleiro2[i-1][j+2])  
-                        tabuleiro2[i+1][j-2] = switch2(tabuleiro2[i+1][j-2])   
-                        tabuleiro2[i+1][j+2] = switch2(tabuleiro2[i+1][j+2]) 
-                elif(i == 7):
-                    if(j == 0):
-                        tabuleiro2[i-1][j+2] = switch2(tabuleiro2[i-1][j+2])
-                        tabuleiro2[i-2][j+1] = switch2(tabuleiro2[i-2][j+1])
-                    elif(j == 1):
-                        tabuleiro2[i-1][j+2] = switch2(tabuleiro2[i-1][j+2])
-                        tabuleiro2[i-2][j+1] = switch2(tabuleiro2[i-2][j+1])
-                        tabuleiro2[i-2][j-1] = switch2(tabuleiro2[i-2][j-1])
-                    elif(j == 6):
-                        tabuleiro2[i-1][j-2] = switch2(tabuleiro2[i-1][j-2])
-                        tabuleiro2[i-2][j+1] = switch2(tabuleiro2[i-2][j+1])
-                        tabuleiro2[i-2][j-1] = switch2(tabuleiro2[i-2][j-1])
-                    elif(j == 7):
-                        tabuleiro2[i-1][j-2] = switch2(tabuleiro2[i-1][j-2])
-                        tabuleiro2[i-2][j-1] = switch2(tabuleiro2[i-2][j-1])
-                    else:
-                        tabuleiro2[i-2][j-1] = switch2(tabuleiro2[i-2][j-1])   
-                        tabuleiro2[i-2][j+1] = switch2(tabuleiro2[i-2][j+1])
-                        tabuleiro2[i-1][j-2] = switch2(tabuleiro2[i-1][j-2])   
-                        tabuleiro2[i-1][j+2] = switch2(tabuleiro2[i-1][j+2])                
-                else:
-                    if(j == 0):
-                        tabuleiro2[i+2][j+1] = switch2(tabuleiro2[i+2][j+1])
-                        tabuleiro2[i+1][j+2] = switch2(tabuleiro2[i+1][j+2])
-                        tabuleiro2[i-1][j+2] = switch2(tabuleiro2[i-1][j+2])
-                        tabuleiro2[i-2][j+1] = switch2(tabuleiro2[i-2][j+1])
-                    elif(j == 1):
-                        tabuleiro2[i+2][j+1] = switch2(tabuleiro2[i+2][j+1])
-                        tabuleiro2[i+2][j-1] = switch2(tabuleiro2[i+2][j-1])
-                        tabuleiro2[i+1][j+2] = switch2(tabuleiro2[i+1][j-1])
-                        tabuleiro2[i-1][j+2] = switch2(tabuleiro2[i-1][j+2])
-                        tabuleiro2[i-2][j+1] = switch2(tabuleiro2[i-2][j+1])
-                        tabuleiro2[i-2][j-1] = switch2(tabuleiro2[i-2][j-1])
-                    elif(j == 6):
-                        tabuleiro2[i+2][j+1] = switch2(tabuleiro2[i+2][j+1])
-                        tabuleiro2[i+2][j-1] = switch2(tabuleiro2[i+2][j-1])                    
-                        tabuleiro2[i+1][j-2] = switch2(tabuleiro2[i+1][j-2])
-                        tabuleiro2[i-1][j-2] = switch2(tabuleiro2[i-1][j-2])
-                        tabuleiro2[i-2][j+1] = switch2(tabuleiro2[i-2][j+1])
-                        tabuleiro2[i-2][j-1] = switch2(tabuleiro2[i-2][j-1])
-                    elif(j == 7):
-                        tabuleiro2[i+2][j-1] = switch2(tabuleiro2[i+2][j-1])                    
-                        tabuleiro2[i+1][j-2] = switch2(tabuleiro2[i+1][j-2])
-                        tabuleiro2[i-1][j-2] = switch2(tabuleiro2[i-1][j-2])
-                        tabuleiro2[i-2][j-1] = switch2(tabuleiro2[i-2][j-1])
-                    else:
-                        tabuleiro2[i-2][j-1] = switch2(tabuleiro2[i-2][j-1])   
-                        tabuleiro2[i-2][j+1] = switch2(tabuleiro2[i-2][j+1])
-                        tabuleiro2[i-1][j-2] = switch2(tabuleiro2[i-1][j-2])   
-                        tabuleiro2[i-1][j+2] = switch2(tabuleiro2[i-1][j+2])  
-                        tabuleiro2[i+1][j-2] = switch2(tabuleiro2[i+1][j-2])   
-                        tabuleiro2[i+1][j+2] = switch2(tabuleiro2[i+1][j+2])
-                        tabuleiro2[i+2][j-1] = switch2(tabuleiro2[i+2][j-1])
-                        tabuleiro2[i+2][j+1] = switch2(tabuleiro2[i+2][j-1])                
+                vet_I = [-2,-2,-1,-1,1,1,2,2]
+                vet_J = [1,-1,2,-2,2,-2,1,-1]
+                for k in range(len(vet_I)):
+                    I = i + vet_I[k]
+                    J = j + vet_J[k]
+                    if(I >= 0 and J >= 0):
+                        try:
+                            tabuleiro2[I][J] = switch2(tabuleiro2[I][J])
+                        except IndexError:
+                            continue                                  
             elif(tabuleiro[i][j] == 'r'): #Movimentos Torre
                     I = i+1
                     J = j
