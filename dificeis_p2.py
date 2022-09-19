@@ -1,15 +1,9 @@
-def switch(c): #Funçao que marca o casas ocupadas pelas peças brancas
-    if(c == '.' or c == 'k'):
-        return "*"
+def switch(c, cor = 'b'): #Funçao que marca o casas ocupadas pelas peças
+    if(cor == 'b'):
+        new_pos = "*" if c == '.' or c == 'k' else  c
     else:
-        return c
-
-def switch2(c): #Funçao que marca o casas ocupadas pelas peças pretas
-    if(c == '.' or c == 'K'):
-        return "*"
-    else:
-        return c
-
+        new_pos = "*" if c == '.' or c == 'K' else  c
+    return new_pos
 
 jogos = 1
 while(True):
@@ -25,13 +19,29 @@ while(True):
         tabuleiro.append(row)
 
 
-    for i in tabuleiro: #caso uma linha em branco entre no tabuleiro
+    for i in tabuleiro: #caso uma linha em branco entre na matriz
         if(len(i) == 0):
             tabuleiro.pop(i)
-            
-    tabuleiro2 = []
-    tabuleiro2 = tabuleiro #tabuleiro 2 serve para checar o xeque das duas cores
+               
+    def perc_tab(dir_i,dir_j,i,j,):
+        '''
+        Utilze o int 1 para direção positiva (para baixo e para direita),
+        0  para constante (n se mexe naquela direção) e 
+        -1 para negativo (para cima e para esquerda);
+        E retorn uma lista com as posições que fora percorridas'''
     
+        global tabuleiro
+        list_pos_vazio = []
+        i += (1*dir_i)
+        j += (1*dir_j)
+        while(i < 8 and i >= 0 and j < 8 and j >= 0):
+            list_pos_vazio.append([i,j])
+            if(tabuleiro[i][j] != '.' and tabuleiro[i][j] != '*'):
+                break
+            i += (1*dir_i)
+            j += (1*dir_j)
+
+        return list_pos_vazio 
     
     #Encontra a posição dos reis / Condição de parada
     casa_K = []
@@ -49,8 +59,7 @@ while(True):
     if(count == 64): #verificação da condição de parada do programa
         break
     
-    
-    # Movimentos das Peças / espaços "ocupados" / Verificação de xeque
+    # Movimentos das Peças / espaços "ocupados" / Verificações   de xeque
     
     #Espaços "ocupados" pelas peças brancas
     for i in range(8):
@@ -64,38 +73,18 @@ while(True):
                     tabuleiro[i-1][j-1] = switch(tabuleiro[i-1][j-1])
                     tabuleiro[i-1][j+1] = switch(tabuleiro[i-1][j+1])                                             
             elif(tabuleiro[i][j] == 'B'): #Movimentos Bispo
-                    I = i+1
-                    J = j+1
-                    while (I < 8 and J < 8):
-                        tabuleiro[I][J] = switch(tabuleiro[I][J])
-                        if(tabuleiro[I][J] != '.' and tabuleiro[I][J] != '*'):
-                            break
-                        I += 1    
-                        J += 1
-                    I = i+1
-                    J = j-1
-                    while (I < 8 and J >= 0):
-                        tabuleiro[I][J] = switch(tabuleiro[I][J])
-                        if(tabuleiro[I][J] != '.' and tabuleiro[I][J] != '*'):
-                            break
-                        I += 1    
-                        J -= 1
-                    I = i-1
-                    J = j+1
-                    while (I >= 0 and J < 8):
-                        tabuleiro[I][J] = switch(tabuleiro[I][J])
-                        if(tabuleiro[I][J] != '.' and tabuleiro[I][J] != '*'):
-                            break
-                        I -= 1    
-                        J += 1
-                    I = i-1
-                    J = j-1
-                    while (I >= 0 and J >= 0):
-                        tabuleiro[I][J] = switch(tabuleiro[I][J])
-                        if(tabuleiro[I][J] != '.' and tabuleiro[I][J] != '*'):
-                            break
-                        I -= 1    
-                        J -= 1
+                casas_occ = perc_tab(1,1,i,j)
+                for k in casas_occ:
+                    tabuleiro[k[0]][k[1]] = switch(tabuleiro[k[0]][k[1]])
+                casas_occ = perc_tab(1,-1,i,j)
+                for k in casas_occ:
+                    tabuleiro[k[0]][k[1]] = switch(tabuleiro[k[0]][k[1]])
+                casas_occ = perc_tab(-1,1,i,j)
+                for k in casas_occ:
+                    tabuleiro[k[0]][k[1]] = switch(tabuleiro[k[0]][k[1]])
+                casas_occ = perc_tab(-1,-1,i,j)
+                for k in casas_occ:
+                    tabuleiro[k[0]][k[1]] = switch(tabuleiro[k[0]][k[1]]) 
             elif(tabuleiro[i][j] == 'N'): #Movimentos Cavalo
                 vet_I = [-2,-2,-1,-1,1,1,2,2]
                 vet_J = [1,-1,2,-2,2,-2,1,-1]
@@ -106,149 +95,82 @@ while(True):
                         try:
                             tabuleiro[I][J] = switch(tabuleiro[I][J])
                         except IndexError:
-                            continue                                   
+                            continue               
             elif(tabuleiro[i][j] == 'R'): #Movimentos Torre
-                    I = i+1
-                    J = j
-                    while (I < 8):
-                        tabuleiro[I][J] = switch(tabuleiro[I][J])
-                        if(tabuleiro[I][J] != '.' and tabuleiro[I][J] != '*'):
-                            break
-                        I += 1    
-                    I = i-1
-                    J = j
-                    while (I >= 0):
-                        tabuleiro[I][J] = switch(tabuleiro[I][J])
-                        if(tabuleiro[I][J] != '.' and tabuleiro[I][J] != '*'):
-                            break
-                        I -= 1    
-                    J = j+1
-                    I = i
-                    while (J < 8):
-                        tabuleiro[I][J] = switch(tabuleiro[I][J])
-                        if(tabuleiro[I][J] != '.' and tabuleiro[I][J] != '*'):
-                            break
-                        J += 1
-                    J = j-1
-                    I = i
-                    while (J >= 0):
-                        tabuleiro[I][J] = switch(tabuleiro[I][J])
-                        if(tabuleiro[I][J] != '.' and tabuleiro[I][J] != '*'):
-                            break   
-                        J -= 1
+                casas_occ = perc_tab(1,0,i,j)
+                for k in casas_occ:
+                    tabuleiro[k[0]][k[1]] = switch(tabuleiro[k[0]][k[1]])
+                casas_occ = perc_tab(-1,0,i,j)
+                for k in casas_occ:
+                    tabuleiro[k[0]][k[1]] = switch(tabuleiro[k[0]][k[1]])
+                casas_occ = perc_tab(0,1,i,j)
+                for k in casas_occ:
+                    tabuleiro[k[0]][k[1]] = switch(tabuleiro[k[0]][k[1]])
+                casas_occ = perc_tab(0,-1,i,j)
+                for k in casas_occ:
+                    tabuleiro[k[0]][k[1]] = switch(tabuleiro[k[0]][k[1]])
             elif(tabuleiro[i][j] == 'Q'): #Movimentos Rainha
-                    I = i+1
-                    J = j+1
-                    while (I < 8 and J < 8):
-                        tabuleiro[I][J] = switch(tabuleiro[I][J])
-                        if(tabuleiro[I][J] != '.' and tabuleiro[I][J] != '*'):
-                            break
-                        I += 1    
-                        J += 1
-                    I = i+1
-                    J = j-1
-                    while (I < 8 and J >= 0):
-                        tabuleiro[I][J] = switch(tabuleiro[I][J])
-                        if(tabuleiro[I][J] != '.' and tabuleiro[I][J] != '*'):
-                            break
-                        I += 1    
-                        J -= 1
-                    I = i-1
-                    J = j+1
-                    while (I >= 0 and J < 8):
-                        tabuleiro[I][J] = switch(tabuleiro[I][J])
-                        if(tabuleiro[I][J] != '.' and tabuleiro[I][J] != '*'):
-                            break
-                        I -= 1    
-                        J += 1
-                    I = i-1
-                    J = j-1
-                    while (I >= 0 and J >= 0):
-                        tabuleiro[I][J] = switch(tabuleiro[I][J])
-                        if(tabuleiro[I][J] != '.' and tabuleiro[I][J] != '*'):
-                            break
-                        I -= 1    
-                        J -= 1
-                    I = i+1
-                    J = j
-                    while (I < 8):
-                        tabuleiro[I][J] = switch(tabuleiro[I][J])
-                        if(tabuleiro[I][J] != '.' and tabuleiro[I][J] != '*'):
-                            break
-                        I += 1    
-                    I = i-1
-                    J = j
-                    while (I >= 0):
-                        tabuleiro[I][J] = switch(tabuleiro[I][J])
-                        if(tabuleiro[I][J] != '.' and tabuleiro[I][J] != '*'):
-                            break
-                        I -= 1    
-                    J = j+1
-                    I = i
-                    while (J < 8):
-                        tabuleiro[I][J] = switch(tabuleiro[I][J])
-                        if(tabuleiro[I][J] != '.' and tabuleiro[I][J] != '*'):
-                            break
-                        J += 1
-                    J = j-1
-                    I = i
-                    while (J >= 0):
-                        tabuleiro[I][J] = switch(tabuleiro[I][J])
-                        if(tabuleiro[I][J] != '.' and tabuleiro[I][J] != '*'):
-                            break   
-                        J -= 1  
-    
+                casas_occ = perc_tab(1,1,i,j)
+                for k in casas_occ:
+                    tabuleiro[k[0]][k[1]] = switch(tabuleiro[k[0]][k[1]])
+                casas_occ = perc_tab(1,-1,i,j)
+                for k in casas_occ:
+                    tabuleiro[k[0]][k[1]] = switch(tabuleiro[k[0]][k[1]])
+                casas_occ = perc_tab(-1,1,i,j)
+                for k in casas_occ:
+                    tabuleiro[k[0]][k[1]] = switch(tabuleiro[k[0]][k[1]])
+                casas_occ = perc_tab(-1,-1,i,j)
+                for k in casas_occ:
+                    tabuleiro[k[0]][k[1]] = switch(tabuleiro[k[0]][k[1]]) 
+                casas_occ = perc_tab(1,0,i,j)
+                for k in casas_occ:
+                    tabuleiro[k[0]][k[1]] = switch(tabuleiro[k[0]][k[1]])
+                casas_occ = perc_tab(-1,0,i,j)
+                for k in casas_occ:
+                    tabuleiro[k[0]][k[1]] = switch(tabuleiro[k[0]][k[1]])
+                casas_occ = perc_tab(0,1,i,j)
+                for k in casas_occ:
+                    tabuleiro[k[0]][k[1]] = switch(tabuleiro[k[0]][k[1]])
+                casas_occ = perc_tab(0,-1,i,j)
+                for k in casas_occ:
+                    tabuleiro[k[0]][k[1]] = switch(tabuleiro[k[0]][k[1]])
+
     #Verificação se o rei preto esta em xeque
     if(tabuleiro[casa_k[0]][casa_k[1]] == '*'):
         jogos += 1
         print(f"Jogo #{jogos}: O rei preto esta em xeque")
         continue
+    
+    for i in range(8): #Limpa os '*' das casas ocupadas pelas brancas
+        for j in range(8):
+            if(tabuleiro[i][j] == '*'):
+                tabuleiro[i][j] = '.'
 
     #Espaços "ocupados" pelas peças pretas
     for i in range(8):
         for j in range(8):
-            if(tabuleiro2[i][j] == 'p'): #Movimentos Peão preto
+            if(tabuleiro[i][j] == 'p'): #Movimentos Peão preto
                 if(j == 0 and i != 0):
-                    tabuleiro2[i+1][j+1] = switch2(tabuleiro2[i-1][j+1]) 
+                    tabuleiro[i+1][j+1] = switch(tabuleiro[i+1][j+1],"p") 
                 elif(j == 7 and i != 0):
-                    tabuleiro2[i+1][j-1] = switch2(tabuleiro2[i-1][j-1])      
+                    tabuleiro[i+1][j-1] = switch(tabuleiro[i+1][j-1],"p")      
                 elif(i != 0):
-                    tabuleiro2[i+1][j-1] = switch2(tabuleiro2[i-1][j-1])
-                    tabuleiro2[i+1][j+1] = switch2(tabuleiro2[i-1][j+1])                                             
-            elif(tabuleiro2[i][j] == 'b'): #Movimentos Bispo
-                    I = i+1
-                    J = j+1
-                    while (I < 8 and J < 8):
-                        tabuleiro2[I][J] = switch2(tabuleiro2[I][J])
-                        if(tabuleiro2[I][J] != '.' and tabuleiro2[I][J] != '*'):
-                            break
-                        I += 1    
-                        J += 1
-                    I = i+1
-                    J = j-1
-                    while (I < 8 and J >= 0):
-                        tabuleiro2[I][J] = switch2(tabuleiro2[I][J])
-                        if(tabuleiro2[I][J] != '.' and tabuleiro2[I][J] != '*'):
-                            break
-                        I += 1    
-                        J -= 1
-                    I = i-1
-                    J = j+1
-                    while (I >= 0 and J < 8):
-                        tabuleiro2[I][J] = switch2(tabuleiro2[I][J])
-                        if(tabuleiro2[I][J] != '.' and tabuleiro2[I][J] != '*'):
-                            break
-                        I -= 1    
-                        J += 1
-                    I = i-1
-                    J = j-1
-                    while (I >= 0 and J >= 0):
-                        tabuleiro2[I][J] = switch2(tabuleiro2[I][J])
-                        if(tabuleiro2[I][J] != '.' and tabuleiro2[I][J] != '*'):
-                            break
-                        I -= 1    
-                        J -= 1
-            elif(tabuleiro2[i][j] == 'n'): #Movimentos Cavalo
+                    tabuleiro[i+1][j-1] = switch(tabuleiro[i+1][j-1],"p")
+                    tabuleiro[i+1][j+1] = switch(tabuleiro[i+1][j+1],"p")                                             
+            elif(tabuleiro[i][j] == 'b'): #Movimentos Bispo
+                casas_occ = perc_tab(1,1,i,j)
+                for k in casas_occ:
+                    tabuleiro[k[0]][k[1]] = switch(tabuleiro[k[0]][k[1]],"p")
+                casas_occ = perc_tab(1,-1,i,j)
+                for k in casas_occ:
+                    tabuleiro[k[0]][k[1]] = switch(tabuleiro[k[0]][k[1]],"p")
+                casas_occ = perc_tab(-1,1,i,j)
+                for k in casas_occ:
+                    tabuleiro[k[0]][k[1]] = switch(tabuleiro[k[0]][k[1]],"p")
+                casas_occ = perc_tab(-1,-1,i,j)
+                for k in casas_occ:
+                    tabuleiro[k[0]][k[1]] = switch(tabuleiro[k[0]][k[1]],"p") 
+            elif(tabuleiro[i][j] == 'n'): #Movimentos Cavalo
                 vet_I = [-2,-2,-1,-1,1,1,2,2]
                 vet_J = [1,-1,2,-2,2,-2,1,-1]
                 for k in range(len(vet_I)):
@@ -256,103 +178,50 @@ while(True):
                     J = j + vet_J[k]
                     if(I >= 0 and J >= 0):
                         try:
-                            tabuleiro2[I][J] = switch2(tabuleiro2[I][J])
+                            tabuleiro[I][J] = switch(tabuleiro[I][J],"p")
                         except IndexError:
-                            continue                                  
+                            continue                   
             elif(tabuleiro[i][j] == 'r'): #Movimentos Torre
-                    I = i+1
-                    J = j
-                    while (I < 8):
-                        tabuleiro2[I][J] = switch2(tabuleiro2[I][J])
-                        if(tabuleiro2[I][J] != '.' and tabuleiro2[I][J] != '*'):
-                            break
-                        I += 1    
-                    I = i-1
-                    J = j
-                    while (I >= 0):
-                        tabuleiro2[I][J] = switch2(tabuleiro2[I][J])
-                        if(tabuleiro2[I][J] != '.' and tabuleiro2[I][J] != '*'):
-                            break
-                        I -= 1    
-                    J = j+1
-                    I = i
-                    while (J < 8):
-                        tabuleiro2[I][J] = switch2(tabuleiro2[I][J])
-                        if(tabuleiro2[I][J] != '.' and tabuleiro2[I][J] != '*'):
-                            break
-                        J += 1
-                    J = j-1
-                    I = i
-                    while (J >= 0):
-                        tabuleiro2[I][J] = switch2(tabuleiro2[I][J])
-                        if(tabuleiro2[I][J] != '.' and tabuleiro2[I][J] != '*'):
-                            break   
-                        J -= 1
+                casas_occ = perc_tab(1,0,i,j)
+                for k in casas_occ:
+                    tabuleiro[k[0]][k[1]] = switch(tabuleiro[k[0]][k[1]],"p")
+                casas_occ = perc_tab(-1,0,i,j)
+                for k in casas_occ:
+                    tabuleiro[k[0]][k[1]] = switch(tabuleiro[k[0]][k[1]],"p")
+                casas_occ = perc_tab(0,1,i,j)
+                for k in casas_occ:
+                    tabuleiro[k[0]][k[1]] = switch(tabuleiro[k[0]][k[1]],"p")
+                casas_occ = perc_tab(0,-1,i,j)
+                for k in casas_occ:
+                    tabuleiro[k[0]][k[1]] = switch(tabuleiro[k[0]][k[1]],"p")
             elif(tabuleiro[i][j] == 'q'): #Movimentos Rainha
-                    I = i+1
-                    J = j+1
-                    while (I < 8 and J < 8):
-                        tabuleiro2[I][J] = switch2(tabuleiro2[I][J])
-                        if(tabuleiro2[I][J] != '.' and tabuleiro2[I][J] != '*'):
-                            break
-                        I += 1    
-                        J += 1
-                    I = i+1
-                    J = j-1
-                    while (I < 8 and J >= 0):
-                        tabuleiro2[I][J] = switch2(tabuleiro2[I][J])
-                        if(tabuleiro2[I][J] != '.' and tabuleiro2[I][J] != '*'):
-                            break
-                        I += 1    
-                        J -= 1
-                    I = i-1
-                    J = j+1
-                    while (I >= 0 and J < 8):
-                        tabuleiro2[I][J] = switch2(tabuleiro2[I][J])
-                        if(tabuleiro2[I][J] != '.' and tabuleiro[I][J] != '*'):
-                            break
-                        I -= 1    
-                        J += 1
-                    I = i-1
-                    J = j-1
-                    while (I >= 0 and J >= 0):
-                        tabuleiro2[I][J] = switch2(tabuleiro2[I][J])
-                        if(tabuleiro2[I][J] != '.' and tabuleiro2[I][J] != '*'):
-                            break
-                        I -= 1    
-                        J -= 1
-                    I = i+1
-                    J = j
-                    while (I < 8):
-                        tabuleiro2[I][J] = switch2(tabuleiro2[I][J])
-                        if(tabuleiro2[I][J] != '.' and tabuleiro2[I][J] != '*'):
-                            break
-                        I += 1    
-                    I = i-1
-                    J = j
-                    while (I >= 0):
-                        tabuleiro2[I][J] = switch2(tabuleiro2[I][J])
-                        if(tabuleiro2[I][J] != '.' and tabuleiro2[I][J] != '*'):
-                            break
-                        I -= 1    
-                    J = j+1
-                    I = i
-                    while (J < 8):
-                        tabuleiro2[I][J] = switch2(tabuleiro2[I][J])
-                        if(tabuleiro2[I][J] != '.' and tabuleiro2[I][J] != '*'):
-                            break
-                        J += 1
-                    J = j-1
-                    I = i
-                    while (J >= 0):
-                        tabuleiro2[I][J] = switch2(tabuleiro2[I][J])
-                        if(tabuleiro2[I][J] != '.' and tabuleiro2[I][J] != '*'):
-                            break   
-                        J -= 1  
-
+                casas_occ = perc_tab(1,1,i,j)
+                for k in casas_occ:
+                    tabuleiro[k[0]][k[1]] = switch(tabuleiro[k[0]][k[1]],"p")
+                casas_occ = perc_tab(1,-1,i,j)
+                for k in casas_occ:
+                    tabuleiro[k[0]][k[1]] = switch(tabuleiro[k[0]][k[1]],"p")
+                casas_occ = perc_tab(-1,1,i,j)
+                for k in casas_occ:
+                    tabuleiro[k[0]][k[1]] = switch(tabuleiro[k[0]][k[1]],"p")
+                casas_occ = perc_tab(-1,-1,i,j)
+                for k in casas_occ:
+                    tabuleiro[k[0]][k[1]] = switch(tabuleiro[k[0]][k[1]],"p") 
+                casas_occ = perc_tab(1,0,i,j)
+                for k in casas_occ:
+                    tabuleiro[k[0]][k[1]] = switch(tabuleiro[k[0]][k[1]],"p")
+                casas_occ = perc_tab(-1,0,i,j)
+                for k in casas_occ:
+                    tabuleiro[k[0]][k[1]] = switch(tabuleiro[k[0]][k[1]],"p")
+                casas_occ = perc_tab(0,1,i,j)
+                for k in casas_occ:
+                    tabuleiro[k[0]][k[1]] = switch(tabuleiro[k[0]][k[1]],"P")
+                casas_occ = perc_tab(0,-1,i,j)
+                for k in casas_occ:
+                    tabuleiro[k[0]][k[1]] = switch(tabuleiro[k[0]][k[1]],"P")  
 
     #Verificação se o rei branco esta em xeque    
-    if(tabuleiro2[casa_K[0]][casa_K[1]] == '*'):         
+    if(tabuleiro[casa_K[0]][casa_K[1]] == '*'):         
         jogos += 1
         print(f"Jogo #{jogos}: O rei branco esta em xeque")
         continue
@@ -360,3 +229,4 @@ while(True):
     #Se nenhum dor estiver em cheque
     print(f"Jogo #{jogos}: Nenhum dos reis esta em xeque")
     jogos += 1
+
